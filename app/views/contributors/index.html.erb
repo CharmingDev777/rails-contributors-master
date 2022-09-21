@@ -1,0 +1,23 @@
+<%
+   @title = @release ? "Rails Contributors - #{@release.name}" : @edge ? 'Rails Contributors - Edge' : add_window_to("Rails Contributors", @time_window)
+   @description = 'Ruby on Rails contributors'
+%>
+
+<h1 id="title">
+  <%= @title %><br>
+  <span class="listing-total">Showing <%= pluralize @contributors.length, 'person' %></span>
+</h1>
+
+<div id="table-wrap">
+  <table>
+    <tr class="header">
+      <th></th>
+      <th>Name</th>
+      <th>Since</th>
+      <th>Commits</th>
+    </tr>
+    <%= render @contributors %>
+  </table>
+</div>
+
+<%= render 'shared/window_sidebar' %>

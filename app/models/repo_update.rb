@@ -1,0 +1,2 @@
+class RepoUpdate < ApplicationRecord
+end

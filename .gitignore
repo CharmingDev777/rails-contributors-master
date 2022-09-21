@@ -1,0 +1,7 @@
+.byebug_history
+/log
+/tmp
+/rails.git
+config/master.key
+public/assets
+public/cache

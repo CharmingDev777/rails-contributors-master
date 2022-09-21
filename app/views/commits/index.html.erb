@@ -1,0 +1,40 @@
+<%
+  if @contributor && @release
+    @title       = %(##{@contributor.rank} <span class="fn">#{h(@contributor.name)}</span> - Rails #{@release.name}).html_safe
+    @description = "Commits contributed by #{@contributor.name} in the #{@release.name} release of Ruby on Rails"
+    @keywords    = @contributor.name
+  elsif @contributor && @edge
+    @title       = %(##{@contributor.rank} <span class="fn">#{h(@contributor.name)}</span> - Edge).html_safe
+    @description = "Unreleased commits contributed by #{@contributor.name} to Ruby on Rails"
+    @keywords    = @contributor.name
+  elsif @contributor
+    @title       = add_window_to(%(##{@contributor.rank} <span class="fn">#{h(@contributor.name)}</span>), @time_window)
+    @description = "Commits contributed by #{@contributor.name} to Ruby on Rails"
+    @keywords    = @contributor.name
+  else
+    @title       = %(Rails #{@release.name})
+    @description = "Commits in the #{@release.name} release of Ruby on Rails"
+    @keywords    = @release.name
+  end
+%>
+
+<!-- see http://google.com/support/webmasters/bin/answer.py?hl=en&answer=99170 -->
+<div class="vcard">
+  <h1 id="title">
+    <%= @title %><br>
+    <span class="listing-total">Showing <%= pluralize @commits.size, 'commit' %></span>
+  </h1>
+
+  <div id="table-wrap">
+    <table>
+      <tr class="header">
+        <th>Hash</th>
+        <th>Date</th>
+        <th>Message</th>
+      </tr>
+      <%= render @commits %>
+    </table>
+  </div>
+</div>
+
+<%= render 'shared/window_sidebar' %>
